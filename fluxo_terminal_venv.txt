@@ -1,0 +1,27 @@
+# Cria o ambiente virtual chamado 'venv'
+python3 -m venv venv
+
+criar o arquivo .gitignore contendo  venv/
+
+---------------------------------------------------------
+Já que você não envia o venv, você precisa enviar uma "lista de compras" das bibliotecas que usou.
+Com o ambiente ativado, gere o arquivo requirements.txt:
+
+pip freeze > requirements.txt
+
+---------------------------------------------------------
+Já que você não envia o venv, você precisa enviar uma "lista de compras" das bibliotecas que usou.
+Com o ambiente ativado, gere o arquivo requirements.txt:
+
+pip freeze > requirements.txt
+
+----------------------------------------------------------
+
+Fluxo no terminal
+
+1. Ativar	source venv/bin/activate	Entra no "modo isolado".
+2. Instalar	pip install pandas	Instala a biblioteca apenas para este projeto.
+3. Atualizar lista	pip freeze > requirements.txt	Salva a nova biblioteca na "lista de compras".
+4. Commitar	git add . && git commit -m "..."	Salva seu código e a lista (mas ignora o venv).
+5. Desativar	deactivate	Sai do ambiente virtual.
+
