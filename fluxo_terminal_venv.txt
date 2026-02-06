@@ -17,11 +17,30 @@ pip freeze > requirements.txt
 
 ----------------------------------------------------------
 
+E se você clonar esse projeto em outro PC?
+Ao baixar seu próprio projeto do GitHub no futuro, a pasta venv não estará lá. Você fará o seguinte:
+
+git clone https://github.com/seu-usuario/projeto.git
+cd projeto
+python3 -m venv venv          # Cria um novo venv vazio
+source venv/bin/activate      # Ativa
+pip install -r requirements.txt # Instala tudo da lista automaticamente
+
+--------------------------------------------------------------
+
 Fluxo no terminal
 
 1. Ativar	source venv/bin/activate	Entra no "modo isolado".
-2. Instalar	pip install pandas	Instala a biblioteca apenas para este projeto.
-3. Atualizar lista	pip freeze > requirements.txt	Salva a nova biblioteca na "lista de compras".
-4. Commitar	git add . && git commit -m "..."	Salva seu código e a lista (mas ignora o venv).
-5. Desativar	deactivate	Sai do ambiente virtual.
+1. CMD -> .\.venv\Scripts\activate.bat
+1. PowerShell -> .\.venv\Scripts\Activate.ps1   
+# Se o PowerShell der um erro de "execução de scripts desabilitada", você pode resolver rodando 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process        # somente para sessão
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser    # permissão para o usuário
+
+apenas para essa sessão.
+
+2. Instalar	pip install pandas	                    # Instala a biblioteca apenas para este projeto.
+3. Atualizar lista	pip freeze > requirements.txt	# Salva a nova biblioteca na "lista de compras".
+4. Commitar	git add . && git commit -m "..."	    # Salva seu código e a lista (mas ignora o venv).
+5. Desativar	deactivate	                        # Sai do ambiente virtual.
 

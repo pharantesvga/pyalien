@@ -1,6 +1,4 @@
 # Py Alien
-## Projeto baseado no livro
-
-Curso Intensivo de Python
+Projeto baseado no Livro - Curso Intensivo de Python (Eric Matthes)
 
 
