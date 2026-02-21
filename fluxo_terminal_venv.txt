@@ -22,8 +22,8 @@ Ao baixar seu próprio projeto do GitHub no futuro, a pasta venv não estará l�
 
 git clone https://github.com/seu-usuario/projeto.git
 cd projeto
-python3 -m venv venv          # Cria um novo venv vazio
-source venv/bin/activate      # Ativa
+python3 -m venv .venv          # Cria um novo venv vazio
+source venv/bin/activate      # Ativa no linux
 pip install -r requirements.txt # Instala tudo da lista automaticamente
 
 --------------------------------------------------------------
@@ -36,6 +36,7 @@ Fluxo no terminal
 # Se o PowerShell der um erro de "execução de scripts desabilitada", você pode resolver rodando 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process        # somente para sessão
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser    # permissão para o usuário
+Get-ExecutionPolicy -List # verificar se deu certo
 
 apenas para essa sessão.
 
