@@ -9,22 +9,26 @@ class AlienInvasion:
 	def __init__(self):
 		"""Inicia a classe e cria os recursos do jogo"""
 		pygame.init()
-		self.clock = pygame.time.Clock()
+		self.relogio = pygame.time.Clock()
 		self.settings = Settings()
-				
+
+		# TELA CHEIA
+		#self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+		#self.settings.screen_width = self.screen.get_rect().width
+		#self.settings.screen_height = self.screen.get_rect().height
+
 		self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_heigth))
 		pygame.display.set_caption("Alien Invasion")
 		
 		self.ship = Ship(self)
-		
-			
+				
 	def run_game(self):
 		"""Inicia o loop principal do jogo"""
 		while True :
 			self._check_events()
 			self.ship.update()
 			self._update_screen()
-			self.clock.tick(60)
+			self.relogio.tick(60)
 	
 	
 	def _check_events(self):
@@ -35,18 +39,28 @@ class AlienInvasion:
 				sys.exit()
 			
 			elif event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_RIGHT:
-					self.ship.moving_right = True
-				if event.key == pygame.K_LEFT:
-					self.ship.moving_left = True
-			
+				self._check_keydown_events(event)
 			elif event.type == pygame.KEYUP:
-				if event.key == pygame.K_RIGHT:
-					self.ship.moving_right = False
-					
-				if event.key == pygame.K_LEFT:
-					self.ship.moving_left = False
+				self._check_keyup_events(event)
 				
+	
+	def _check_keydown_events(self, event):
+		"""responde ao pressionar uma tecla"""
+		if event.key == pygame.K_RIGHT:
+			self.ship.moving_right = True
+		elif event.key == pygame.K_LEFT:
+			self.ship.moving_left = True
+		elif event.key == pygame.K_q:
+			sys.exit()
+	
+	def _check_keyup_events(self, event):
+		"""responde ao soltar a tecla pressionada"""
+		if event.key == pygame.K_RIGHT:
+			self.ship.moving_right = False
+		elif event.key == pygame.K_LEFT:
+			self.ship.moving_left = False
+	
+	
 				
 	def _update_screen(self):
 		""" atualiza as imagens da tela e muda para a tela nova"""
