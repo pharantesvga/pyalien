@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 class AlienInvasion:
 	""" Classe geral para gerenciar ativos e comportamentos do jogo """
@@ -21,12 +22,22 @@ class AlienInvasion:
 		pygame.display.set_caption("Alien Invasion")
 		
 		self.ship = Ship(self)
+		self.bullets = pygame.sprite.Group()
 				
 	def run_game(self):
 		"""Inicia o loop principal do jogo"""
 		while True :
 			self._check_events()
 			self.ship.update()
+			self.bullets.update()
+			
+			#descarta os projeteis que desapareceram da tela
+			for bullet in self.bullets.copy():
+				if bullet.rect.bottom <= 0:
+					self.bullets.remove(bullet)
+			#verificar na tela os numeros de projeteis e se estão diminuindo
+			#print(len(self.bullets))
+			
 			self._update_screen()
 			self.relogio.tick(60)
 	
@@ -52,6 +63,8 @@ class AlienInvasion:
 			self.ship.moving_left = True
 		elif event.key == pygame.K_q:
 			sys.exit()
+		elif event.key == pygame.K_SPACE:
+			self._fire_bullets()
 	
 	def _check_keyup_events(self, event):
 		"""responde ao soltar a tecla pressionada"""
@@ -61,11 +74,19 @@ class AlienInvasion:
 			self.ship.moving_left = False
 	
 	
+	def _fire_bullets(self):
+		new_bullet = Bullet(self)
+		self.bullets.add(new_bullet)
+	
 				
 	def _update_screen(self):
 		""" atualiza as imagens da tela e muda para a tela nova"""
 		#redesenha a tela a cada passagem pelo loop
 		self.screen.fill(self.settings.bg_color)
+		
+		for bullet in self.bullets.sprites():
+			bullet.draw_bullet() 
+		
 		self.ship.blitme()
 		#deixa a tela desenhada mais recente possivel
 		pygame.display.flip()
